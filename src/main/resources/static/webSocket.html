@@ -19,7 +19,7 @@
         <br>
         <label>请输入您发送的消息</label><input  type="text" id ="chatContent"/>
         <br>
-        <label>请输入你的房间号</label><input  type="text" id = "roomId"/>
+        <label>请输入你的用户ID</label><input  type="text" id = "userId"/>
         <br>
         <button id="sendMessage" onclick="sendMessage();">发送</button>
         <br>
@@ -38,8 +38,8 @@
     }
 
     function connect(){
-        var roomId = $('#roomId').val();
-        ws = new WebSocket('ws://localhost:8080/webSocket/' + roomId);
+        var userId = $('#userId').val();
+        ws = new WebSocket('ws://localhost:8080/webSocket/' + userId);
         ws.onopen = WSonOpen;
         ws.onmessage = WSonMessage;
         ws.onclose = WSonClose;
@@ -87,8 +87,8 @@
 
     function sendMessage(){
         var chatContent = $("#chatContent").val();
-        var roomId = $('#roomId').val();
-        ws.send(JSON.stringify({'roomId':roomId,'chatContent':chatContent}))
+        var userId = $('#userId').val();
+        ws.send(JSON.stringify({'userId':userId,'chatContent':chatContent}))
     }
 
     function showResponse(message){
